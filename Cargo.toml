@@ -1,0 +1,15 @@
+[package]
+name = "roslog_echo"
+version = "0.1.0"
+authors = ["Marc Alban <marcalban@hatchbed.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "2.33.0"   # argument parsing
+dynfmt = { version = "0.1.5", features = ["curly"] }
+lazy_static = "1.4.0"
+linemux = "0.2"   # file tailing
+regex = "1.5"     # regular expressions
+tokio = { version = "1.6.0", features = ["macros", "rt-multi-thread"] }
