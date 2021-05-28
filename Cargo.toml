@@ -10,6 +10,7 @@ edition = "2018"
 clap = "2.33.0"   # argument parsing
 dynfmt = { version = "0.1.5", features = ["curly"] }
 lazy_static = "1.4.0"
-linemux = "0.2"   # file tailing
-regex = "1.5"     # regular expressions
+linemux = "0.2"   # log file tailing
+path-absolutize = "3.0.10"
+regex = "1.5" 
 tokio = { version = "1.6.0", features = ["macros", "rt-multi-thread"] }

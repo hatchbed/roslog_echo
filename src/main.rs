@@ -1,9 +1,14 @@
+extern crate path_absolutize;
+
 use clap::{Arg, App};
 use dynfmt::{Format, SimpleCurlyFormat};
 use lazy_static::lazy_static;
 use linemux::MuxedLines;
+use path_absolutize::*;
 use regex::Regex;
 use std::cmp::Ordering;
+use std::path::Path;
+use std::process;
 
 lazy_static! {
     static ref FIND_SPACE: regex::Regex = Regex::new(" ").unwrap();
@@ -237,7 +242,7 @@ pub async fn main() -> std::io::Result<()> {
         .arg(Arg::with_name("FILE")
                  .takes_value(true)
                  .required(true)
-                 .help("Rosout log file"))
+                 .help("Rosout log file."))
         .arg(Arg::with_name("format")
                  .long("format")
                  .takes_value(true)
@@ -246,7 +251,10 @@ pub async fn main() -> std::io::Result<()> {
                  .hide_default_value(true)
                  .help("Format string."))
         .after_help(
-"Format String Specification
+"
+Note:  The log file doesn't need to exist to begin with, but the parent directory does.
+
+Format String Specification
 ----------------------------
 
 metavariables:
@@ -305,7 +313,12 @@ default format: \"{time} [{severity}] {message}\"
                  .help("Ignore fatal level log messages"))
         .get_matches();
 
-    let logfile = args.value_of("FILE").unwrap();
+    let logfile = Path::new(args.value_of("FILE").unwrap()).absolutize().expect("Error: valid path not provided");
+    let logdir = logfile.parent().expect("Error: valid path not provided");
+    if !logdir.is_dir() {
+        println!("Error: {:?} path doesn't exist.", logdir);
+        process::exit(1);
+    }
 
     let ignore_debug = args.is_present("debug-off");
     let ignore_info = args.is_present("info-off");
