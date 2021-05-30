@@ -3,14 +3,21 @@ name = "roslog_echo"
 version = "0.1.0"
 authors = ["Marc Alban <marcalban@hatchbed.com>"]
 edition = "2018"
+description = "A CLI tool to echo and reformat ROS log messages to stdout as they are added to rosout.log"
+license = "BSD 3-Clause License"
+readme = "README.md"
+repository = "https://github.com/hatchbed/roslog_echo"
+
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "2.33.0"   # argument parsing
-dynfmt = { version = "0.1.5", features = ["curly"] }
+clap = "2.33.0"                                          # argument parsing
+colored = "2"                                            # terminal colors
+dynfmt = { version = "0.1.5", features = ["curly"] }     # log formatting
 lazy_static = "1.4.0"
-linemux = "0.2"   # log file tailing
+linemux = "0.2"                                          # log file tailing
 path-absolutize = "3.0.10"
-regex = "1.5" 
+regex = "1.5"
 tokio = { version = "1.6.0", features = ["macros", "rt-multi-thread"] }
