@@ -7,7 +7,7 @@ they are added to [rosout.log](http://wiki.ros.org/rosout#rosout.log).
 
 Rosout log messages don't seem to be guaranteed to make it to the console, especially if they are INFO level.  This can
 make debugging difficult.  The rosout.log file doesn't seem to have this problem.  It also contains some extra metadata
-that makes it a bit noisy to skim through.  This tool will tail the rosout.log file and echo new lines to stdout as the
+that makes it a bit noisy to skim through.  This tool will tail the rosout.log file and echo new lines to stdout as they
 are written in a user specified formatting.
 
 
@@ -30,6 +30,7 @@ FLAGS:
     -w, --warn-off     Ignore warning level log messages
     -e, --error-off    Ignore error level log messages
     -f, --fatal-off    Ignore fatal level log messages
+    -c, --colored      Color output based on severity
     -h, --help         Prints help information
     -V, --version      Prints version information
 
@@ -41,8 +42,6 @@ OPTIONS:
 ARGS:
     <FILE>    Rosout log file.
 
-
-Note:  The log file doesn't need to exist to begin with, but the parent directory does.
 
 Format String Specification
 ----------------------------

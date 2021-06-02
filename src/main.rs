@@ -275,8 +275,6 @@ pub async fn main() -> std::io::Result<()> {
         )
         .after_help(
             "
-Note:  The log file doesn't need to exist to begin with, but the parent directory does.
-
 Format String Specification
 ----------------------------
 
